@@ -1,6 +1,8 @@
 package com.juangm.movies_mvi.presentation.di
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.juangm.movies_mvi.BuildConfig
+import com.juangm.movies_mvi.data.repository.MoviesRepository
 import com.juangm.movies_mvi.data.repository.MoviesRepositoryImpl
 import com.juangm.movies_mvi.data.source.remote.MoviesRemoteSourceImpl
 import com.juangm.movies_mvi.data.source.remote.api.MoviesRemoteSource
@@ -17,8 +19,8 @@ val dataModule = module {
     single { provideOkHttpClient() }
     single { provideRetrofit(get()) }
     single { provideMoviesService(get()) }
-    single { MoviesRemoteSourceImpl(get()) }
-    single { MoviesRepositoryImpl(get()) }
+    single { MoviesRemoteSourceImpl(get()) as MoviesRemoteSource }
+    single { MoviesRepositoryImpl(get()) as MoviesRepository }
 }
 
 fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder()
@@ -31,6 +33,7 @@ fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder()
 fun provideRetrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
     .baseUrl(BASE_API_URL)
     .addConverterFactory(GsonConverterFactory.create())
+    .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(CoroutineCallAdapterFactory())
     .client(client)
     .build()
 
