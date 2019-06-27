@@ -1,12 +1,25 @@
-package com.example.movies_mvi.presentation.di
+package com.juangm.movies_mvi.presentation.di
 
-import com.example.movies_mvi.BuildConfig
+import com.juangm.movies_mvi.BuildConfig
+import com.juangm.movies_mvi.data.repository.MoviesRepositoryImpl
+import com.juangm.movies_mvi.data.source.remote.MoviesRemoteSourceImpl
+import com.juangm.movies_mvi.data.source.remote.api.MoviesRemoteSource
+import com.juangm.movies_mvi.data.source.remote.api.MoviesService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_API_URL = "https://api.themoviedb.org/3/"
+
+val dataModule = module {
+    single { provideOkHttpClient() }
+    single { provideRetrofit(get()) }
+    single { provideMoviesService(get()) }
+    single { MoviesRemoteSourceImpl(get()) }
+    single { MoviesRepositoryImpl(get()) }
+}
 
 fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder()
     .addInterceptor(HttpLoggingInterceptor().apply {
