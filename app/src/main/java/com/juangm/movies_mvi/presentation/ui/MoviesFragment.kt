@@ -39,6 +39,7 @@ class MoviesFragment : Fragment() {
     private fun setRecyclerAdapter() {
         adapter = MoviesAdapter()
         movies_recycler.layoutManager = GridLayoutManager(context, 3)
+        movies_recycler.addItemDecoration(GridMarginItemDecoration(10))
         movies_recycler.adapter = adapter
     }
 
