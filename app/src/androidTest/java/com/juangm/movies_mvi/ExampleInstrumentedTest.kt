@@ -1,4 +1,4 @@
-package com.example.movies_mvi
+package com.juangm.movies_mvi
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
