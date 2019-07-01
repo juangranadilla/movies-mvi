@@ -1,6 +1,5 @@
 package com.juangm.movies_mvi.data.source.remote
 
-import com.juangm.movies_mvi.data.source.remote.api.MoviesRemoteSource
 import com.juangm.movies_mvi.data.source.remote.api.MoviesService
 import com.juangm.movies_mvi.domain.models.Movie
 
