@@ -9,7 +9,7 @@ The application uses the following libraries:
 * [Coroutines](https://developer.android.com/kotlin/coroutines) for concurrency
 * [Koin](https://github.com/InsertKoinIO/koin) for dependency injection
 * [Navigation](https://developer.android.com/guide/navigation) (Architecture component)
-* [Retrofit](https://square.github.io/retrofit/) for networking, to retrieve data from [Random user generator](https://randomuser.me/)
+* [Retrofit](https://square.github.io/retrofit/) for networking
 * [Timber](https://github.com/JakeWharton/timber) for logging
 * [Glide](https://github.com/bumptech/glide) for loading images
 
