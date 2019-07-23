@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.presentation.ui
+package com.juangm.movies_mvi.presentation.ui.movies
 
 import com.juangm.movies_mvi.domain.models.Movie
 import com.juangm.movies_mvi.presentation.base.ViewState

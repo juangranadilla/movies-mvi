@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.presentation.ui
+package com.juangm.movies_mvi.presentation.ui.movies
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.juangm.movies_mvi.R
 import com.juangm.movies_mvi.domain.action.MoviesAction
 import com.juangm.movies_mvi.domain.models.Movie
+import com.juangm.movies_mvi.presentation.utils.GridMarginItemDecoration
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber

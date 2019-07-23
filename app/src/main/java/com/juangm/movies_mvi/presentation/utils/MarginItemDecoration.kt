@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.presentation.ui
+package com.juangm.movies_mvi.presentation.utils
 
 import android.graphics.Rect
 import android.view.View

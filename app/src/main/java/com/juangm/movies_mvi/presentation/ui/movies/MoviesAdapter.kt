@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.presentation.ui
+package com.juangm.movies_mvi.presentation.ui.movies
 
 import android.view.LayoutInflater
 import android.view.View

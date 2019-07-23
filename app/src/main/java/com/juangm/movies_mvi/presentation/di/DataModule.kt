@@ -5,7 +5,7 @@ import com.juangm.movies_mvi.BuildConfig
 import com.juangm.movies_mvi.data.repository.MoviesRepository
 import com.juangm.movies_mvi.data.repository.MoviesRepositoryImpl
 import com.juangm.movies_mvi.data.source.remote.MoviesRemoteSourceImpl
-import com.juangm.movies_mvi.data.source.remote.api.MoviesRemoteSource
+import com.juangm.movies_mvi.data.source.remote.MoviesRemoteSource
 import com.juangm.movies_mvi.data.source.remote.api.MoviesService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

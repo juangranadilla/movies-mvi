@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.presentation.ui
+package com.juangm.movies_mvi.presentation.ui.movies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
