@@ -1,6 +1,8 @@
 # movies-mvi
 
-This is a sample [TMDB](https://www.themoviedb.org/) application to show what I've learn about MVI (Model View Intent) architecture pattern, applied in a clean architecture project, using [the new integration between Coroutines and Architecture Components](https://medium.com/corouteam/exploring-kotlin-coroutines-and-lifecycle-architectural-components-integration-on-android-c63bb8a9156f)
+This is a sample [TMDB](https://www.themoviedb.org/) application to show what I've learn about MVI (Model View Intent) architecture pattern, applied in a clean architecture project, using [the new integration between Coroutines and Architecture Components](https://medium.com/corouteam/exploring-kotlin-coroutines-and-lifecycle-architectural-components-integration-on-android-c63bb8a9156f). 
+
+I've also tried using [Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) instead of Groovy in Gradle files.
 
 ## Dependencies
 
