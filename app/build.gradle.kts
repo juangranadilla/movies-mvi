@@ -7,16 +7,17 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("com.github.ben-manes.versions")
 }
 
 android {
-    compileSdkVersion(Config.Android.compileSdkVersion)
+    compileSdkVersion(AndroidSdk.compileSdkVersion)
     defaultConfig {
-        applicationId = Config.Android.applicationId
-        minSdkVersion(Config.Android.minSdkVersion)
-        targetSdkVersion(Config.Android.targetSdkVersion)
-        versionCode = Config.Android.versionCode
-        versionName = Config.Android.versionName
+        applicationId = AndroidSdk.applicationId
+        minSdkVersion(AndroidSdk.minSdkVersion)
+        targetSdkVersion(AndroidSdk.targetSdkVersion)
+        versionCode = AndroidSdk.versionCode
+        versionName = AndroidSdk.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -50,54 +51,54 @@ dependencies {
 
     // Kotlin
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
-    implementation(Config.Libs.core_ktx)
+    implementation(Libs.core_ktx)
 
     // Android x
-    implementation(Config.Libs.appcompat)
-    implementation(Config.Libs.legacy_support_v4)
-    implementation(Config.Libs.constraint)
-    implementation(Config.Libs.navigation_fragment)
-    implementation(Config.Libs.navigation_ui)
-    implementation(Config.Libs.lifecycle_extensions)
-    implementation(Config.Libs.lifecycle_viewmodel)
-    implementation(Config.Libs.lifecycle_livedata)
-    kapt(Config.Libs.lifecycle_compiler)
+    implementation(Libs.appcompat)
+    implementation(Libs.legacy_support_v4)
+    implementation(Libs.constraint)
+    implementation(Libs.navigation_fragment)
+    implementation(Libs.navigation_ui)
+    implementation(Libs.lifecycle_extensions)
+    implementation(Libs.lifecycle_viewmodel)
+    implementation(Libs.lifecycle_livedata)
+    kapt(Libs.lifecycle_compiler)
 
     // Material
-    implementation(Config.Libs.material)
+    implementation(Libs.material)
 
     // Coroutines
-    implementation(Config.Libs.coroutines_android)
-    implementation(Config.Libs.coroutines_core)
+    implementation(Libs.coroutines_android)
+    implementation(Libs.coroutines_core)
 
     // Koin
-    implementation(Config.Libs.koin)
-    implementation(Config.Libs.koin_viewmodel)
+    implementation(Libs.koin)
+    implementation(Libs.koin_viewmodel)
 
     // Retrofit
-    implementation(Config.Libs.retrofit) {
+    implementation(Libs.retrofit) {
         exclude(module = "okhttp")
     }
-    implementation(Config.Libs.retrofit_gson_converter)
+    implementation(Libs.retrofit_gson_converter)
 
     // OkHttp
-    implementation(Config.Libs.okhttp)
+    implementation(Libs.okhttp)
 
     // Gson
-    implementation(Config.Libs.gson)
+    implementation(Libs.gson)
 
     // Retrofit coroutines adapter
-    implementation(Config.Libs.coroutines_adapter)
+    implementation(Libs.coroutines_adapter)
 
     // Glide
-    implementation(Config.Libs.glide)
-    annotationProcessor(Config.Libs.glide_compiler)
+    implementation(Libs.glide)
+    annotationProcessor(Libs.glide_compiler)
 
     // Timber
-    implementation(Config.Libs.timber)
+    implementation(Libs.timber)
 
     // Testing
-    testImplementation(Config.Libs.junit)
-    androidTestImplementation(Config.Libs.test_runner)
-    androidTestImplementation(Config.Libs.espresso)
+    testImplementation(TestLibs.junit)
+    androidTestImplementation(TestLibs.test_runner)
+    androidTestImplementation(TestLibs.espresso)
 }
