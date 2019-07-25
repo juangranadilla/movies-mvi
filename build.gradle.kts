@@ -5,8 +5,8 @@ buildscript {
         
     }
     dependencies {
-        classpath(Config.Libs.gradle)
-        classpath(Config.Libs.kotlin_gradle_plugin)
+        classpath(BuildPlugins.gradle)
+        classpath(BuildPlugins.kotlin_gradle_plugin)
     }
 }
 
@@ -14,7 +14,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
     }
 }
 
