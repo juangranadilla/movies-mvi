@@ -2,8 +2,6 @@
 
 This is a sample [TMDB](https://www.themoviedb.org/) application to show what I've learn about MVI (Model View Intent) architecture pattern, applied in a clean architecture project, using [the new integration between Coroutines and Architecture Components](https://medium.com/corouteam/exploring-kotlin-coroutines-and-lifecycle-architectural-components-integration-on-android-c63bb8a9156f). 
 
-I've also tried using [Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) instead of Groovy in Gradle files.
-
 ## Dependencies
 
 The application uses the following libraries:
@@ -23,11 +21,16 @@ The app uses the https://www.themoviedb.org/ API, so you need to use your own AP
 tmdb_api_key="your_api_key"
 ```
 
+## Kotlin DSL
+I've also tried using [Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) instead of Groovy in Gradle files. And also used the [Gradle Versions Plugin](https://github.com/ben-manes/gradle-versions-plugin) to check for available libraries updates, as Kotlin DSL gradle files won't notify about that.
+
+
 ## Useful links
 * https://medium.com/corouteam/exploring-kotlin-coroutines-and-lifecycle-architectural-components-integration-on-android-c63bb8a9156f
 * https://www.raywenderlich.com/817602-mvi-architecture-for-android-tutorial-getting-started
 * https://medium.com/@thanh.bm/android-mvi-architecture-with-livedata-c72e9e1bd3e6
 * https://proandroiddev.com/mvi-on-android-with-livedata-coroutines-d2172bc7f775
+* https://proandroiddev.com/migrate-to-gradle-kotlin-dsl-in-4-steps-f3e3b27e1f4d?gi=c3816856385d
 
 License
 -------

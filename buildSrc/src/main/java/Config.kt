@@ -12,10 +12,12 @@ object BuildPlugins {
     object Versions {
         const val gradle_version = "3.4.1"
         const val kotlin_version = "1.3.41"
+        const val gradle_versions_version = "0.21.0"
     }
 
     const val gradle = "com.android.tools.build:gradle:${Versions.gradle_version}"
     const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
+    const val gradle_versions_plugin = "com.github.ben-manes:gradle-versions-plugin:${Versions.gradle_versions_version}"
 }
 
 object Libs {
@@ -29,8 +31,8 @@ object Libs {
         const val lifecycle_version = "2.2.0-alpha02"
         const val material_version = "1.1.0-alpha08"
         const val coroutines_version = "1.2.1"
-        const val retrofit_version = "2.5.0"
-        const val okhttp_version = "3.12.0"
+        const val retrofit_version = "2.6.0"
+        const val okhttp_version = "4.0.1"
         const val gson_version = "2.8.5"
         const val coroutines_adapter_version = "0.9.2"
         const val glide_version = "4.9.0"
