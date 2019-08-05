@@ -1,7 +1,6 @@
-package com.juangm.movies_mvi.ui.movies
+package com.juangm.presentation.state
 
 import com.juangm.domain.models.Movie
-import com.juangm.movies_mvi.base.ViewState
 
 data class MoviesViewState(
     val isLoading: Boolean = false,

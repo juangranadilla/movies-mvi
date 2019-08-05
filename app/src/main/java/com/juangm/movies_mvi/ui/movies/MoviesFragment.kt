@@ -8,10 +8,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.juangm.movies_mvi.R
 import com.juangm.domain.action.MoviesAction
 import com.juangm.domain.models.Movie
-import com.juangm.movies_mvi.utils.GridMarginItemDecoration
+import com.juangm.movies_mvi.R
+import com.juangm.movies_mvi.ui.utils.GridMarginItemDecoration
+import com.juangm.presentation.state.MoviesViewState
+import com.juangm.presentation.viewmodel.MoviesViewModel
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -34,6 +36,12 @@ class MoviesFragment : Fragment() {
 
         setRecyclerAdapter()
         observeMovies()
+
+        /**
+         * This is the intent, an intention to perform an action. In this case, it's called automatically on start,
+         * but usually, this will be an action performed by an user, like clicking on a button.
+         * This will tell the ViewModel the action we want to dispatch
+         */
         getTopRatedMoviesAction()
     }
 
@@ -44,6 +52,9 @@ class MoviesFragment : Fragment() {
         movies_recycler.adapter = adapter
     }
 
+    /**
+     * We observe for any change in the view state, in order to render it
+     */
     private fun observeMovies() {
         moviesViewModel.viewState.observe(this, Observer { moviesViewState ->
             render(moviesViewState)
@@ -54,6 +65,11 @@ class MoviesFragment : Fragment() {
         moviesViewModel.dispatch(MoviesAction.GetTopRatedMoviesAction)
     }
 
+    /**
+     * This is the only function we will call to update the view,
+     * and only when the view state we are observing in the ViewModel has changed,
+     * due to a use intent or action.
+     */
     private fun render(state: MoviesViewState) {
         renderLoadingState(state.isLoading)
         renderMoviesState(state.movies)

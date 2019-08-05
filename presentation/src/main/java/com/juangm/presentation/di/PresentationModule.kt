@@ -1,6 +1,6 @@
-package com.juangm.movies_mvi.di
+package com.juangm.presentation.di
 
-import com.juangm.movies_mvi.ui.movies.MoviesViewModel
+import com.juangm.presentation.viewmodel.MoviesViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

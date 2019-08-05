@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 android {
@@ -17,12 +18,18 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    // Modules
+    implementation(project(":domain"))
+
     // Kotlin
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
     implementation(Libs.core_ktx)
 
     // Android x
+    implementation(Libs.lifecycle_extensions)
+    implementation(Libs.lifecycle_viewmodel)
     implementation(Libs.lifecycle_livedata)
+    kapt(Libs.lifecycle_compiler)
 
     // Coroutines
     implementation(Libs.coroutines_android)
@@ -31,9 +38,6 @@ dependencies {
     // Koin
     implementation(Libs.koin)
     implementation(Libs.koin_viewmodel)
-
-    // Gson
-    implementation(Libs.gson)
 
     // Timber
     implementation(Libs.timber)

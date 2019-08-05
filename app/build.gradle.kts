@@ -1,4 +1,3 @@
-
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 plugins {
@@ -37,6 +36,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     // Modules
+    implementation(project(":presentation"))
     implementation(project(":domain"))
     implementation(project(":data"))
 
@@ -57,10 +57,6 @@ dependencies {
 
     // Material
     implementation(Libs.material)
-
-    // Coroutines
-    implementation(Libs.coroutines_android)
-    implementation(Libs.coroutines_core)
 
     // Koin
     implementation(Libs.koin)

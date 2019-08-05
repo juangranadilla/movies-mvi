@@ -3,10 +3,8 @@ import java.util.*
 
 plugins {
     id("com.android.library")
-}
-apply {
-    plugin("kotlin-android")
-    plugin("kotlin-android-extensions")
+    kotlin("android")
+    kotlin("android.extensions")
 }
 
 android {

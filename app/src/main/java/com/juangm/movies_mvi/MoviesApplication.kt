@@ -3,7 +3,7 @@ package com.juangm.movies_mvi
 import android.app.Application
 import com.juangm.data.di.dataModule
 import com.juangm.domain.di.domainModule
-import com.juangm.movies_mvi.di.presentationModule
+import com.juangm.presentation.di.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber

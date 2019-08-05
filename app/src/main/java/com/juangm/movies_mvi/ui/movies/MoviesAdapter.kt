@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.juangm.movies_mvi.R
 import com.juangm.domain.models.Movie
+import com.juangm.movies_mvi.R
+import com.juangm.movies_mvi.constants.TMDB_BASE_IMAGE_URL
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(MovieDiffCallback()) {
@@ -31,7 +32,7 @@ class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(MovieDiff
                 movie.posterPath?.run {
                     Glide
                         .with(context)
-                        .load("https://image.tmdb.org/t/p/w185$this")
+                        .load(TMDB_BASE_IMAGE_URL + this)
                         .into(movie_image)
                 }
             }

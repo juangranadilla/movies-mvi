@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.utils
+package com.juangm.movies_mvi.ui.utils
 
 import android.graphics.Rect
 import android.view.View
