@@ -4,14 +4,13 @@ import androidx.lifecycle.LiveDataScope
 import com.juangm.domain.repository.MoviesRepositoryContract
 import com.juangm.domain.result.MoviesResult
 
-class TopRatedMoviesUseCase(private val moviesRepository: MoviesRepositoryContract) {
+class TopRatedMoviesUseCase(private val moviesRepository: MoviesRepositoryContract): BaseUseCase<MoviesResult>() {
 
-    //TODO make a base use case
     /**
      * Using the LiveDataScope for coroutines, we can use emit to call a suspend function and return the result,
      * or just emit a value directly, without calling a suspend function
      */
-    suspend fun getTopRatedMovies(scope: LiveDataScope<MoviesResult>) {
+    override suspend fun execute(scope: LiveDataScope<MoviesResult>) {
         scope.emit(MoviesResult.Loading)
         scope.emit(getTopRatedMoviesFromApi())
     }

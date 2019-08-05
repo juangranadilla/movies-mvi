@@ -25,7 +25,7 @@ class MoviesViewModel(
      */
     override fun handle(action: MoviesAction) = liveData<MoviesResult> {
         when(action) {
-            is MoviesAction.GetTopRatedMoviesAction -> topRatedMoviesUseCase.getTopRatedMovies(this)
+            is MoviesAction.GetTopRatedMoviesAction -> topRatedMoviesUseCase.execute(this)
         }
     }
 
