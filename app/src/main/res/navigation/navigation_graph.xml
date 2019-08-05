@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/moviesFragment"
-            android:name="com.juangm.movies_mvi.presentation.ui.movies.MoviesFragment"
+            android:name="com.juangm.movies_mvi.ui.movies.MoviesFragment"
             android:label="fragment_movies"
             tools:layout="@layout/fragment_movies"/>
 
