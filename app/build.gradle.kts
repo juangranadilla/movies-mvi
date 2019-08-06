@@ -6,6 +6,7 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("com.github.ben-manes.versions")
+    id("androidx.navigation.safeargs")
 }
 
 android {
