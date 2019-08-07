@@ -25,6 +25,10 @@ class MoviesAdapter(
         holder.bind(getItem(position))
     }
 
+    override fun getItemCount(): Int {
+        return super.getItemCount()
+    }
+
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(movie: Movie) {

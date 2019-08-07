@@ -15,6 +15,7 @@ import com.juangm.domain.action.MoviesAction
 import com.juangm.domain.models.Movie
 import com.juangm.movies_mvi.R
 import com.juangm.movies_mvi.ui.utils.GridMarginItemDecoration
+import com.juangm.movies_mvi.ui.utils.InfiniteScrollListener
 import com.juangm.presentation.state.MoviesViewState
 import com.juangm.presentation.viewmodel.MoviesViewModel
 import kotlinx.android.synthetic.main.fragment_movies.*
@@ -39,21 +40,17 @@ class MoviesFragment : Fragment(), MovieClickListener {
 
         setRecyclerAdapter()
         observeMovies()
-
-        /**
-         * This is the intent, an intention to perform an action. In this case, it's called automatically on start,
-         * but usually, this will be an action performed by an user, like clicking on a button.
-         * This will tell the ViewModel the action we want to dispatch
-         */
-        getTopRatedMoviesAction()
+        getMovies()
     }
 
     private fun setRecyclerAdapter() {
         moviesAdapter = MoviesAdapter(this)
         movies_recycler.apply {
-            layoutManager = GridLayoutManager(context, 3)
+            val gridLayoutManager = GridLayoutManager(context, 3)
+            layoutManager = gridLayoutManager
             addItemDecoration(GridMarginItemDecoration(10))
             adapter = moviesAdapter
+            addOnScrollListener(InfiniteScrollListener({ getMoreMovies() }, gridLayoutManager))
         }
     }
 
@@ -61,13 +58,17 @@ class MoviesFragment : Fragment(), MovieClickListener {
      * We observe for any change in the view state, in order to render it
      */
     private fun observeMovies() {
-        moviesViewModel.viewState.observe(this, Observer { moviesViewState ->
+        moviesViewModel.viewState.observe(viewLifecycleOwner, Observer { moviesViewState ->
             render(moviesViewState)
         })
     }
 
-    private fun getTopRatedMoviesAction() {
+    private fun getMovies() {
         moviesViewModel.dispatch(MoviesAction.GetTopRatedMoviesAction)
+    }
+
+    private fun getMoreMovies() {
+        moviesViewModel.dispatch(MoviesAction.LoadMoreTopRatedMoviesAction)
     }
 
     /**
@@ -77,6 +78,7 @@ class MoviesFragment : Fragment(), MovieClickListener {
      */
     private fun render(state: MoviesViewState) {
         renderLoadingState(state.isLoading)
+        renderLoadingMoreState(state.isLoadingMore)
         renderMoviesState(state.movies)
         renderErrorState(state.error)
     }
@@ -87,6 +89,13 @@ class MoviesFragment : Fragment(), MovieClickListener {
             movies_progress_bar.visibility = View.VISIBLE
         else
             movies_progress_bar.visibility = View.GONE
+    }
+
+    /**
+     * We could show here a different ProgressBar at bottom
+     */
+    private fun renderLoadingMoreState(isLoadingMore: Boolean) {
+        Timber.i("isLoadingMore: $isLoadingMore")
     }
 
     private fun renderMoviesState(movies: List<Movie>) {
@@ -102,7 +111,7 @@ class MoviesFragment : Fragment(), MovieClickListener {
     }
 
     override fun onMovieClick(movie: Movie, movieImage: ImageView, position: Int) {
-        Timber.i("Showing detail for movie ${movie.id} with name: ${movie.originalTitle} at position $position")
+        Timber.i("Showing detail for movie ${movie.id} with name: ${movie.title} at position $position")
         val directions = MoviesFragmentDirections.actionMoviesFragmentToMovieDetailFragment(movie, position)
         val extras = FragmentNavigatorExtras(movieImage to movieImage.transitionName)
         findNavController().navigate(directions, extras)

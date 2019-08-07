@@ -24,6 +24,9 @@ tmdb_api_key="your_api_key"
 ## Kotlin DSL
 I've also tried using [Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) instead of Groovy in Gradle files. And also used the [Gradle Versions Plugin](https://github.com/ben-manes/gradle-versions-plugin) to check for available libraries updates, as Kotlin DSL gradle files won't notify about that.
 
+## Screenshots
+
+<img src="screenshots/movies.png" width=200> <img src="screenshots/detail.png" width=200>
 
 ## Useful links
 * https://medium.com/corouteam/exploring-kotlin-coroutines-and-lifecycle-architectural-components-integration-on-android-c63bb8a9156f
