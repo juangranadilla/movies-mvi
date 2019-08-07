@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation_graph"
             app:startDestination="@id/moviesFragment">
 
     <fragment
             android:id="@+id/moviesFragment"
-            android:name="com.juangm.movies_mvi.ui.movies.MoviesFragment"
-            android:label="fragment_movies"
-            tools:layout="@layout/fragment_movies"/>
+            android:name="com.juangm.movies_mvi.ui.movies.list.MoviesFragment"
+            android:label="@string/movies_fragment_title"
+            tools:layout="@layout/fragment_movies">
+
+        <action
+                android:id="@+id/action_moviesFragment_to_movieDetailFragment"
+                app:destination="@id/movieDetailFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    </fragment>
+
+    <fragment android:id="@+id/movieDetailFragment"
+              android:name="com.juangm.movies_mvi.ui.movies.detail.MovieDetailFragment"
+              android:label="@string/movie_detail_fragment_title"
+              tools:layout="@layout/fragment_movie_detail">
+
+        <argument
+                android:name="movie"
+                app:argType="com.juangm.domain.models.Movie"/>
+
+        <argument
+                android:name="position"
+                app:argType="integer"/>
+
+    </fragment>
 
 </navigation>

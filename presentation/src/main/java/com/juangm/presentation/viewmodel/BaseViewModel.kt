@@ -16,7 +16,7 @@ abstract class BaseViewModel<S: ViewState, A: Action, R: Result> : ViewModel() {
      * [handle]: will call the corresponding use case depending on the action
      * [reduce]: will receive the use case result / state, and modify the viewState LiveData
      */
-    protected abstract val internalViewState: S
+    protected abstract var internalViewState: S
     protected abstract fun handle(action: A): LiveData<R>
     protected abstract fun reduce(result: R): S
 
@@ -43,5 +43,13 @@ abstract class BaseViewModel<S: ViewState, A: Action, R: Result> : ViewModel() {
      */
     fun dispatch(action: A) {
         nextAction.value = action
+    }
+
+    /**
+     * Return the new state and saves it on [internalViewState]
+     */
+    protected fun newState(newViewState: S): S {
+        internalViewState = newViewState
+        return newViewState
     }
 }

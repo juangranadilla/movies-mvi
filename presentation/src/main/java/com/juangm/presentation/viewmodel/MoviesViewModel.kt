@@ -3,18 +3,20 @@ package com.juangm.presentation.viewmodel
 import androidx.lifecycle.liveData
 import com.juangm.domain.action.MoviesAction
 import com.juangm.domain.result.MoviesResult
-import com.juangm.domain.usecase.TopRatedMoviesUseCase
+import com.juangm.domain.usecase.GetTopRatedMoviesUseCase
+import com.juangm.domain.usecase.LoadMoreTopRatedMoviesUseCase
 import com.juangm.presentation.state.MoviesViewState
 
 class MoviesViewModel(
-    private val topRatedMoviesUseCase: TopRatedMoviesUseCase
+    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
+    private val loadMoreTopRatedMoviesUseCase: LoadMoreTopRatedMoviesUseCase
 ): BaseViewModel<MoviesViewState, MoviesAction, MoviesResult>() {
 
     /**
      * This is the last view state. We initialize it here, and we will use it in the reduce method,
      * with the data class copy function, to create the new state, depending on the received result
      */
-    override val internalViewState = MoviesViewState()
+    override var internalViewState = MoviesViewState()
 
     /**
      * This is a [BaseViewModel] method we have to implement in every ViewModel.
@@ -25,7 +27,10 @@ class MoviesViewModel(
      */
     override fun handle(action: MoviesAction) = liveData<MoviesResult> {
         when(action) {
-            is MoviesAction.GetTopRatedMoviesAction -> topRatedMoviesUseCase.execute(this)
+            is MoviesAction.GetTopRatedMoviesAction ->
+                if(internalViewState.movies.isEmpty())
+                    getTopRatedMoviesUseCase.execute(this)
+            is MoviesAction.LoadMoreTopRatedMoviesAction -> loadMoreTopRatedMoviesUseCase.execute(this)
         }
     }
 
@@ -36,9 +41,19 @@ class MoviesViewModel(
      */
     override fun reduce(result: MoviesResult): MoviesViewState {
         return when(result) {
-            is MoviesResult.Loading -> internalViewState.copy(isLoading = true)
-            is MoviesResult.Success -> internalViewState.copy(isLoading = false, movies = result.movies, error = null)
-            is MoviesResult.Failure -> internalViewState.copy(isLoading = false, error = Throwable(result.errorMessage))
+            is MoviesResult.Loading -> newState(internalViewState.copy(isLoading = true))
+            is MoviesResult.LoadingMore -> newState(internalViewState.copy(isLoading = false, isLoadingMore = true))
+            is MoviesResult.Success -> newState(internalViewState.copy(
+                isLoading = false,
+                isLoadingMore = false,
+                movies = result.movies,
+                error = null)
+            )
+            is MoviesResult.Failure -> newState(internalViewState.copy(
+                isLoading = false,
+                isLoadingMore = false,
+                error = Throwable(result.errorMessage))
+            )
         }
     }
 }

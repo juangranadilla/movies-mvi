@@ -1,27 +1,31 @@
-package com.juangm.movies_mvi.ui.movies
+package com.juangm.movies_mvi.ui.movies.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.juangm.domain.action.MoviesAction
 import com.juangm.domain.models.Movie
 import com.juangm.movies_mvi.R
 import com.juangm.movies_mvi.ui.utils.GridMarginItemDecoration
+import com.juangm.movies_mvi.ui.utils.InfiniteScrollListener
 import com.juangm.presentation.state.MoviesViewState
 import com.juangm.presentation.viewmodel.MoviesViewModel
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class MoviesFragment : Fragment() {
+class MoviesFragment : Fragment(), MovieClickListener {
 
     private val moviesViewModel by viewModel<MoviesViewModel>()
-    private lateinit var adapter: MoviesAdapter
+    private lateinit var moviesAdapter: MoviesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,33 +40,35 @@ class MoviesFragment : Fragment() {
 
         setRecyclerAdapter()
         observeMovies()
-
-        /**
-         * This is the intent, an intention to perform an action. In this case, it's called automatically on start,
-         * but usually, this will be an action performed by an user, like clicking on a button.
-         * This will tell the ViewModel the action we want to dispatch
-         */
-        getTopRatedMoviesAction()
+        getMovies()
     }
 
     private fun setRecyclerAdapter() {
-        adapter = MoviesAdapter()
-        movies_recycler.layoutManager = GridLayoutManager(context, 3)
-        movies_recycler.addItemDecoration(GridMarginItemDecoration(10))
-        movies_recycler.adapter = adapter
+        moviesAdapter = MoviesAdapter(this)
+        movies_recycler.apply {
+            val gridLayoutManager = GridLayoutManager(context, 3)
+            layoutManager = gridLayoutManager
+            addItemDecoration(GridMarginItemDecoration(10))
+            adapter = moviesAdapter
+            addOnScrollListener(InfiniteScrollListener({ getMoreMovies() }, gridLayoutManager))
+        }
     }
 
     /**
      * We observe for any change in the view state, in order to render it
      */
     private fun observeMovies() {
-        moviesViewModel.viewState.observe(this, Observer { moviesViewState ->
+        moviesViewModel.viewState.observe(viewLifecycleOwner, Observer { moviesViewState ->
             render(moviesViewState)
         })
     }
 
-    private fun getTopRatedMoviesAction() {
+    private fun getMovies() {
         moviesViewModel.dispatch(MoviesAction.GetTopRatedMoviesAction)
+    }
+
+    private fun getMoreMovies() {
+        moviesViewModel.dispatch(MoviesAction.LoadMoreTopRatedMoviesAction)
     }
 
     /**
@@ -72,6 +78,7 @@ class MoviesFragment : Fragment() {
      */
     private fun render(state: MoviesViewState) {
         renderLoadingState(state.isLoading)
+        renderLoadingMoreState(state.isLoadingMore)
         renderMoviesState(state.movies)
         renderErrorState(state.error)
     }
@@ -84,9 +91,16 @@ class MoviesFragment : Fragment() {
             movies_progress_bar.visibility = View.GONE
     }
 
+    /**
+     * We could show here a different ProgressBar at bottom
+     */
+    private fun renderLoadingMoreState(isLoadingMore: Boolean) {
+        Timber.i("isLoadingMore: $isLoadingMore")
+    }
+
     private fun renderMoviesState(movies: List<Movie>) {
         Timber.i("movies: ${movies.size}")
-        adapter.submitList(movies)
+        moviesAdapter.submitList(movies)
     }
 
     private fun renderErrorState(error: Throwable?) {
@@ -94,5 +108,12 @@ class MoviesFragment : Fragment() {
             Timber.i("error: $it")
             Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onMovieClick(movie: Movie, movieImage: ImageView, position: Int) {
+        Timber.i("Showing detail for movie ${movie.id} with name: ${movie.title} at position $position")
+        val directions = MoviesFragmentDirections.actionMoviesFragmentToMovieDetailFragment(movie, position)
+        val extras = FragmentNavigatorExtras(movieImage to movieImage.transitionName)
+        findNavController().navigate(directions, extras)
     }
 }

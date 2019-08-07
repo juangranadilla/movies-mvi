@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.ui.movies
+package com.juangm.movies_mvi.ui.movies.list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +12,9 @@ import com.juangm.movies_mvi.R
 import com.juangm.movies_mvi.constants.TMDB_BASE_IMAGE_URL
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(MovieDiffCallback()) {
+class MoviesAdapter(
+    private val movieClickListener: MovieClickListener
+): ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
@@ -21,6 +23,10 @@ class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(MovieDiff
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    override fun getItemCount(): Int {
+        return super.getItemCount()
     }
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -34,6 +40,11 @@ class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(MovieDiff
                         .with(context)
                         .load(TMDB_BASE_IMAGE_URL + this)
                         .into(movie_image)
+                }
+
+                setOnClickListener {
+                    movie_image.transitionName = context.getString(R.string.movie_image_transition, adapterPosition)
+                    movieClickListener.onMovieClick(movie, movie_image, adapterPosition)
                 }
             }
         }

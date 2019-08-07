@@ -13,11 +13,13 @@ object BuildPlugins {
         const val gradle_version = "3.4.1"
         const val kotlin_version = "1.3.41"
         const val gradle_versions_version = "0.21.0"
+        const val navigation_safeargs_version = "1.0.0"
     }
 
     const val gradle = "com.android.tools.build:gradle:${Versions.gradle_version}"
     const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
     const val gradle_versions_plugin = "com.github.ben-manes:gradle-versions-plugin:${Versions.gradle_versions_version}"
+    const val navigation_safeargs_plugin = "android.arch.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation_safeargs_version}"
 }
 
 object Libs {
