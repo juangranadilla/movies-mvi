@@ -8,10 +8,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.juangm.domain.action.MoviesAction
 import com.juangm.domain.models.Movie
 import com.juangm.movies_mvi.R
 import com.juangm.movies_mvi.ui.utils.GridMarginItemDecoration
@@ -22,9 +19,13 @@ import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class MoviesFragment : Fragment(), MovieClickListener {
+abstract class MoviesBaseFragment : Fragment(), MovieClickListener {
 
-    private val moviesViewModel by viewModel<MoviesViewModel>()
+    protected abstract fun getMovies()
+    protected abstract fun loadMoreMovies()
+    protected abstract fun showMovieDetails(movie: Movie, movieImage: ImageView, position: Int)
+
+    protected val moviesViewModel by viewModel<MoviesViewModel>()
     private lateinit var moviesAdapter: MoviesAdapter
 
     override fun onCreateView(
@@ -50,7 +51,7 @@ class MoviesFragment : Fragment(), MovieClickListener {
             layoutManager = gridLayoutManager
             addItemDecoration(GridMarginItemDecoration(10))
             adapter = moviesAdapter
-            addOnScrollListener(InfiniteScrollListener({ getMoreMovies() }, gridLayoutManager))
+            addOnScrollListener(InfiniteScrollListener({ loadMoreMovies() }, gridLayoutManager))
         }
     }
 
@@ -61,14 +62,6 @@ class MoviesFragment : Fragment(), MovieClickListener {
         moviesViewModel.viewState.observe(viewLifecycleOwner, Observer { moviesViewState ->
             render(moviesViewState)
         })
-    }
-
-    private fun getMovies() {
-        moviesViewModel.dispatch(MoviesAction.GetTopRatedMoviesAction)
-    }
-
-    private fun getMoreMovies() {
-        moviesViewModel.dispatch(MoviesAction.LoadMoreTopRatedMoviesAction)
     }
 
     /**
@@ -111,9 +104,6 @@ class MoviesFragment : Fragment(), MovieClickListener {
     }
 
     override fun onMovieClick(movie: Movie, movieImage: ImageView, position: Int) {
-        Timber.i("Showing detail for movie ${movie.id} with name: ${movie.title} at position $position")
-        val directions = MoviesFragmentDirections.actionMoviesFragmentToMovieDetailFragment(movie, position)
-        val extras = FragmentNavigatorExtras(movieImage to movieImage.transitionName)
-        findNavController().navigate(directions, extras)
+        showMovieDetails(movie, movieImage, position)
     }
 }
