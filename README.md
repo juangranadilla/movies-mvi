@@ -26,7 +26,7 @@ I've also tried using [Kotlin DSL](https://docs.gradle.org/current/userguide/kot
 
 ## Screenshots
 
-<img src="screenshots/movies.png" width=200> <img src="screenshots/detail.png" width=200>
+<img src="screenshots/movies.png" width=300> <img src="screenshots/detail.png" width=300>
 
 ## Useful links
 * https://medium.com/corouteam/exploring-kotlin-coroutines-and-lifecycle-architectural-components-integration-on-android-c63bb8a9156f
