@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/popularMoviesFragment"
+            android:title="@string/movies_bottom_navigation_popular"
+            android:icon="@drawable/ic_popular_movies"/>
+
+    <item
+            android:id="@+id/topRatedMoviesFragment"
+            android:title="@string/movies_bottom_navigation_top_rated"
+            android:icon="@drawable/ic_top_rated_movies"/>
+
+    <item
+            android:id="@+id/upcomingMoviesFragment"
+            android:title="@string/movies_bottom_navigation_upcoming"
+            android:icon="@drawable/ic_upcoming_movies"/>
+</menu>

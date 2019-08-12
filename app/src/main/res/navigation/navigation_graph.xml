@@ -3,16 +3,48 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/navigation_graph"
-            app:startDestination="@id/moviesFragment">
+            app:startDestination="@id/popularMoviesFragment">
 
     <fragment
-            android:id="@+id/moviesFragment"
-            android:name="com.juangm.movies_mvi.ui.movies.list.MoviesFragment"
-            android:label="@string/movies_fragment_title"
+            android:id="@+id/popularMoviesFragment"
+            android:name="com.juangm.movies_mvi.ui.movies.list.PopularMoviesFragment"
+            android:label="@string/popular_movies_fragment_title"
             tools:layout="@layout/fragment_movies">
 
         <action
-                android:id="@+id/action_moviesFragment_to_movieDetailFragment"
+                android:id="@+id/action_popularMoviesFragment_to_movieDetailFragment"
+                app:destination="@id/movieDetailFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/topRatedMoviesFragment"
+            android:name="com.juangm.movies_mvi.ui.movies.list.TopRatedMoviesFragment"
+            android:label="@string/top_rated_movies_fragment_title"
+            tools:layout="@layout/fragment_movies">
+
+        <action
+                android:id="@+id/action_topRatedMoviesFragment_to_movieDetailFragment"
+                app:destination="@id/movieDetailFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/upcomingMoviesFragment"
+            android:name="com.juangm.movies_mvi.ui.movies.list.UpcomingMoviesFragment"
+            android:label="@string/upcoming_movies_fragment_title"
+            tools:layout="@layout/fragment_movies">
+
+        <action
+                android:id="@+id/action_upcomingMoviesFragment_to_movieDetailFragment"
                 app:destination="@id/movieDetailFragment"
                 app:enterAnim="@anim/nav_default_enter_anim"
                 app:exitAnim="@anim/nav_default_exit_anim"

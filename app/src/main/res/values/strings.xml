@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">movies-mvi</string>
-    <string name="movies_fragment_title">Movies</string>
+
+    <string name="movies_bottom_navigation_popular">Popular</string>
+    <string name="movies_bottom_navigation_top_rated">Top rated</string>
+    <string name="movies_bottom_navigation_upcoming">Upcoming</string>
+
+    <string name="popular_movies_fragment_title">Popular movies</string>
+    <string name="top_rated_movies_fragment_title">Top rated movies</string>
+    <string name="upcoming_movies_fragment_title">Upcoming movies</string>
     <string name="movie_detail_fragment_title">Movie detail</string>
 
     <string name="movie_image_transition">movie_image_transition_%1$d</string>
@@ -9,5 +16,6 @@
         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
         esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-        qui officia deserunt mollit anim id est laborum.</string>
+        qui officia deserunt mollit anim id est laborum.
+    </string>
 </resources>

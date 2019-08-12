@@ -1,6 +1,7 @@
 package com.juangm.data.repository
 
 import com.juangm.data.source.remote.MoviesRemoteSourceContract
+import com.juangm.data.source.remote.api.MoviesResponse
 import com.juangm.domain.models.Movie
 import com.juangm.domain.repository.MoviesRepositoryContract
 import timber.log.Timber
@@ -10,16 +11,52 @@ class MoviesRepository(private val moviesRemoteSource: MoviesRemoteSourceContrac
     /**
      * Repository cache
      */
-    private var movies = mutableListOf<Movie>()
-    private var nextPage: Int = 1
+    private var popularMovies = mutableListOf<Movie>()
+    private var popularNextPage: Int = 1
+    private var topRatedMovies = mutableListOf<Movie>()
+    private var topRatedNextPage: Int = 1
+    private var upcomingMovies = mutableListOf<Movie>()
+    private var upcomingNextPage: Int = 1
+
+    override suspend fun getPopularMoviesAsync(loadMore: Boolean): List<Movie>? {
+        return getMovies(
+            loadMore,
+            popularMovies,
+            { moviesRemoteSource.getPopularMoviesFromApi(popularNextPage) },
+            { popularNextPage = it + 1 }
+        )
+    }
 
     override suspend fun getTopRatedMoviesAsync(loadMore: Boolean): List<Movie>? {
+        return getMovies(
+            loadMore,
+            topRatedMovies,
+            { moviesRemoteSource.getTopRatedMoviesFromApi(topRatedNextPage) },
+            { topRatedNextPage = it + 1 }
+        )
+    }
+
+    override suspend fun getUpcomingMoviesAsync(loadMore: Boolean): List<Movie>? {
+        return getMovies(
+            loadMore,
+            upcomingMovies,
+            { moviesRemoteSource.getUpcomingMoviesFromApi(upcomingNextPage) },
+            { upcomingNextPage = it + 1 }
+        )
+    }
+
+    private suspend fun getMovies(
+        loadMore: Boolean,
+        movies: MutableList<Movie>,
+        remoteSourceCall: suspend () -> MoviesResponse?,
+        onPageRetrieved: (actualPage: Int) -> Unit
+    ): List<Movie> {
         if(loadMore || movies.isEmpty()) {
-            val moviesResponse = moviesRemoteSource.getTopRatedMoviesFromApi(page = nextPage)
+            val moviesResponse = remoteSourceCall()
             moviesResponse?.let { response ->
                 response.results?.let { movies.addAll(it.toMutableList()) }
-                nextPage = response.page + 1
-                Timber.i("Page ${response.page} retrieved. Next page: $nextPage. Movies size: ${movies.size}")
+                Timber.i("Page ${response.page} retrieved. Movies size: ${movies.size}")
+                onPageRetrieved(response.page)
             }
         }
         return movies.toList()
