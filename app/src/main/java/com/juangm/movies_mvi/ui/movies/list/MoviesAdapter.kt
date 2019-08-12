@@ -29,7 +29,6 @@ class MoviesAdapter(
 
         fun bind(movie: Movie) {
             itemView.apply {
-                movie_title.text = movie.title
 
                 movie.posterPath?.run {
                     Glide

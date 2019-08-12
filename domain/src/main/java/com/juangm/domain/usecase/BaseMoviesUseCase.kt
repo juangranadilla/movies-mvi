@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveDataScope
 import com.juangm.domain.models.Movie
 import com.juangm.domain.result.MoviesResult
 
-abstract class BaseTopRatedMoviesUseCase: BaseUseCase<MoviesResult>() {
+abstract class BaseMoviesUseCase: BaseUseCase<MoviesResult>() {
 
-    abstract suspend fun getTopRatedMoviesAsync(): List<Movie>?
+    abstract suspend fun getMoviesAsync(): List<Movie>?
 
     /**
      * Using the LiveDataScope for coroutines, we can use emit to call a suspend function and return the result,
@@ -14,15 +14,15 @@ abstract class BaseTopRatedMoviesUseCase: BaseUseCase<MoviesResult>() {
      */
     override suspend fun execute(scope: LiveDataScope<MoviesResult>) {
         scope.emit(MoviesResult.LoadingMore)
-        scope.emit(getMoreTopRatedMovies())
+        scope.emit(getMovies())
     }
 
     /**
      * Here, we call the repository, receive a result, and return a MoviesResult, with the corresponding state
      */
-    private suspend fun getMoreTopRatedMovies(): MoviesResult {
+    private suspend fun getMovies(): MoviesResult {
         try {
-            var data = getTopRatedMoviesAsync()
+            var data = getMoviesAsync()
             data = data ?: emptyList()
             return MoviesResult.Success(data)
         } catch (throwable: Throwable) {

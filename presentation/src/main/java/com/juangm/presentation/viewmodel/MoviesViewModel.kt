@@ -3,13 +3,16 @@ package com.juangm.presentation.viewmodel
 import androidx.lifecycle.liveData
 import com.juangm.domain.action.MoviesAction
 import com.juangm.domain.result.MoviesResult
-import com.juangm.domain.usecase.GetTopRatedMoviesUseCase
-import com.juangm.domain.usecase.LoadMoreTopRatedMoviesUseCase
+import com.juangm.domain.usecase.*
 import com.juangm.presentation.state.MoviesViewState
 
 class MoviesViewModel(
-    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
-    private val loadMoreTopRatedMoviesUseCase: LoadMoreTopRatedMoviesUseCase
+    private val getTopRatedTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
+    private val loadMoreTopRatedTopRatedMoviesUseCase: LoadMoreTopRatedMoviesUseCase,
+    private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
+    private val loadMorePopularMoviesUseCase: LoadMorePopularMoviesUseCase,
+    private val getUpcomingMoviesUseCase: GetUpcomingMoviesUseCase,
+    private val loadMoreUpcomingMoviesUseCase: LoadMoreUpcomingMoviesUseCase
 ): BaseViewModel<MoviesViewState, MoviesAction, MoviesResult>() {
 
     /**
@@ -27,10 +30,15 @@ class MoviesViewModel(
      */
     override fun handle(action: MoviesAction) = liveData<MoviesResult> {
         when(action) {
+            is MoviesAction.GetPopularMoviesAction ->
+                if(internalViewState.movies.isEmpty()) getPopularMoviesUseCase.execute(this)
+            is MoviesAction.LoadMorePopularMoviesAction -> loadMorePopularMoviesUseCase.execute(this)
             is MoviesAction.GetTopRatedMoviesAction ->
-                if(internalViewState.movies.isEmpty())
-                    getTopRatedMoviesUseCase.execute(this)
-            is MoviesAction.LoadMoreTopRatedMoviesAction -> loadMoreTopRatedMoviesUseCase.execute(this)
+                if(internalViewState.movies.isEmpty()) getTopRatedTopRatedMoviesUseCase.execute(this)
+            is MoviesAction.LoadMoreTopRatedMoviesAction -> loadMoreTopRatedTopRatedMoviesUseCase.execute(this)
+            is MoviesAction.GetUpcomingMoviesAction ->
+                if(internalViewState.movies.isEmpty()) getUpcomingMoviesUseCase.execute(this)
+            is MoviesAction.LoadMoreUpcomingMoviesAction -> loadMoreUpcomingMoviesUseCase.execute(this)
         }
     }
 

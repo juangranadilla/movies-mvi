@@ -59,6 +59,7 @@ abstract class MoviesBaseFragment : Fragment(), MovieClickListener {
      * We observe for any change in the view state, in order to render it
      */
     private fun observeMovies() {
+        Timber.i("Start observing viewState...")
         moviesViewModel.viewState.observe(viewLifecycleOwner, Observer { moviesViewState ->
             render(moviesViewState)
         })
@@ -104,6 +105,7 @@ abstract class MoviesBaseFragment : Fragment(), MovieClickListener {
     }
 
     override fun onMovieClick(movie: Movie, movieImage: ImageView, position: Int) {
+        Timber.i("Showing detail for movie ${movie.id} with name: ${movie.title} at position $position")
         showMovieDetails(movie, movieImage, position)
     }
 }

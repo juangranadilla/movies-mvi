@@ -2,7 +2,7 @@ package com.juangm.domain.usecase
 
 import com.juangm.domain.repository.MoviesRepositoryContract
 
-class GetTopRatedMoviesUseCase(private val moviesRepository: MoviesRepositoryContract): BaseTopRatedMoviesUseCase() {
+class GetTopRatedMoviesUseCase(private val moviesRepository: MoviesRepositoryContract): BaseMoviesUseCase() {
 
-    override suspend fun getTopRatedMoviesAsync() = moviesRepository.getTopRatedMoviesAsync(loadMore = false)
+    override suspend fun getMoviesAsync() = moviesRepository.getTopRatedMoviesAsync(loadMore = false)
 }
