@@ -7,13 +7,14 @@ import com.juangm.domain.result.MoviesResult
 abstract class BaseMoviesUseCase: BaseUseCase<MoviesResult>() {
 
     abstract suspend fun getMoviesAsync(): List<Movie>?
+    abstract val loadingResult: MoviesResult
 
     /**
      * Using the LiveDataScope for coroutines, we can use emit to call a suspend function and return the result,
      * or just emit a value directly, without calling a suspend function
      */
     override suspend fun execute(scope: LiveDataScope<MoviesResult>) {
-        scope.emit(MoviesResult.LoadingMore)
+        scope.emit(loadingResult)
         scope.emit(getMovies())
     }
 

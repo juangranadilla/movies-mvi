@@ -8,17 +8,7 @@ import com.juangm.domain.action.Action
 import com.juangm.domain.result.Result
 import com.juangm.presentation.state.ViewState
 
-abstract class BaseViewModel<S: ViewState, A: Action, R: Result> : ViewModel() {
-    /**
-     * We force every ViewModel to initialize the [internalViewState],
-     * and to manage the handle and reduce functions.
-     * [internalViewState]: will hold the last view state
-     * [handle]: will call the corresponding use case depending on the action
-     * [reduce]: will receive the use case result / state, and modify the viewState LiveData
-     */
-    protected abstract var internalViewState: S
-    protected abstract fun handle(action: A): LiveData<R>
-    protected abstract fun reduce(result: R): S
+abstract class BaseViewModel<S: ViewState, A: Action, R: Result>(private val initialViewState: S) : ViewModel() {
 
     /**
      * LiveData which holds the next action to dispatch
@@ -26,30 +16,38 @@ abstract class BaseViewModel<S: ViewState, A: Action, R: Result> : ViewModel() {
     private val nextAction = MutableLiveData<A>()
 
     /**
-     * LiveData which hold the actual view state.
-     * We use [Transformations.switchMap] to apply a function ([handle]) to the [nextAction] LiveData,
-     * and [Transformations.map] to apply a function ([reduce]) to the resultant LiveData.
+     * LiveData which hold the current view state
+     */
+    private var _viewState: LiveData<S> = MutableLiveData(initialViewState)
+    val viewState: LiveData<S>
+        get() = _viewState
+
+    /**
+     * We use Transformations.switchMap to apply a function (handle) to the nextAction LiveData,
+     * and Transformations.map to apply a function (reduce) to the resultant LiveData.
      * So, we ensure that, when an action is dispatched, the nextAction value will change,
      * calling handle first, and then reduce with the result
      */
-    val viewState = Transformations.map(Transformations.switchMap(nextAction) {
-        handle(it)
-    }) {
-        reduce(it)
+    init {
+        _viewState = Transformations.map(Transformations.switchMap(nextAction) {
+            handle(it)
+        }) {
+            reduce(_viewState.value ?: initialViewState, it)
+        }
     }
+
+    /**
+     * We force every ViewModel to manage the handle and reduce functions.
+     * [handle]: will call the corresponding use case depending on the action
+     * [reduce]: will receive the use case result and the last state, and will create the new state
+     */
+    protected abstract fun handle(action: A): LiveData<R>
+    protected abstract fun reduce(currentViewState: S, result: R): S
 
     /**
      * Changes the value of the [nextAction] LiveData with the new action
      */
     fun dispatch(action: A) {
         nextAction.value = action
-    }
-
-    /**
-     * Return the new state and saves it on [internalViewState]
-     */
-    protected fun newState(newViewState: S): S {
-        internalViewState = newViewState
-        return newViewState
     }
 }
