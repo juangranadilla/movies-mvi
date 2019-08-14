@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import coil.transform.RoundedCornersTransformation
 import com.juangm.domain.models.Movie
 import com.juangm.movies_mvi.R
 import com.juangm.movies_mvi.constants.TMDB_BASE_IMAGE_URL
@@ -35,6 +36,7 @@ class MoviesAdapter(
                 movie_image.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
                     crossfade(true)
                     error(R.drawable.ic_movie_image_error_background)
+                    transformations(RoundedCornersTransformation(10f))
                 }
 
                 setOnClickListener {

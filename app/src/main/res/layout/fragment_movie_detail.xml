@@ -19,6 +19,16 @@
             app:layout_constraintRight_toRightOf="parent">
 
         <ImageView
+                android:id="@+id/movie_image_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
                 android:id="@+id/movie_image"
                 android:layout_width="@dimen/movie_image_width"
                 android:layout_height="@dimen/movie_image_height"
