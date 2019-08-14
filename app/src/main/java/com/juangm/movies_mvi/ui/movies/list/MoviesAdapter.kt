@@ -25,7 +25,7 @@ class MoviesAdapter(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
-        Timber.d("Binding view holder at position $position --> ${movie.id} - ${movie.title}")
+        Timber.d("Binding view holder at position $position --> id: ${movie.id}, title: ${movie.title}")
         holder.bind(movie)
     }
 
