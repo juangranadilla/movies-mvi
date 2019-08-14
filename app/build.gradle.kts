@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
@@ -63,9 +64,8 @@ dependencies {
     implementation(Libs.koin)
     implementation(Libs.koin_viewmodel)
 
-    // Glide
-    implementation(Libs.glide)
-    annotationProcessor(Libs.glide_compiler)
+    // Coil
+    implementation(Libs.coil)
 
     // Timber
     implementation(Libs.timber)
@@ -74,4 +74,10 @@ dependencies {
     testImplementation(TestLibs.junit)
     androidTestImplementation(TestLibs.test_runner)
     androidTestImplementation(TestLibs.espresso)
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }

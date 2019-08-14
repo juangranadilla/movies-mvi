@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.api.load
+import coil.transform.RoundedCornersTransformation
 import com.juangm.domain.models.Movie
 import com.juangm.movies_mvi.R
 import com.juangm.movies_mvi.constants.TMDB_BASE_IMAGE_URL
 import kotlinx.android.synthetic.main.item_movie.view.*
+import timber.log.Timber
 
 class MoviesAdapter(
     private val movieClickListener: MovieClickListener
@@ -22,19 +24,19 @@ class MoviesAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val movie = getItem(position)
+        Timber.d("Binding view holder at position $position --> ${movie.id} - ${movie.title}")
+        holder.bind(movie)
     }
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(movie: Movie) {
             itemView.apply {
-
-                movie.posterPath?.run {
-                    Glide
-                        .with(context)
-                        .load(TMDB_BASE_IMAGE_URL + this)
-                        .into(movie_image)
+                movie_image.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
+                    crossfade(true)
+                    error(R.drawable.ic_movie_image_error_background)
+                    transformations(RoundedCornersTransformation(10f))
                 }
 
                 setOnClickListener {

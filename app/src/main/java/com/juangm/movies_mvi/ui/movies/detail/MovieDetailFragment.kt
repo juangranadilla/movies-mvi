@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
-import com.bumptech.glide.Glide
+import coil.api.load
+import coil.transform.BlurTransformation
+import coil.transform.RoundedCornersTransformation
 import com.juangm.domain.models.Movie
 import com.juangm.movies_mvi.R
 import com.juangm.movies_mvi.constants.TMDB_BASE_IMAGE_URL
@@ -43,11 +45,16 @@ class MovieDetailFragment : Fragment() {
         movie_description.text = movie.overview
         movie_date.text = movie.releaseDate
         movie_image.transitionName = getString(R.string.movie_image_transition, position)
-        movie.posterPath?.run {
-            Glide
-                .with(requireContext())
-                .load(TMDB_BASE_IMAGE_URL + this)
-                .into(movie_image)
+
+        movie_image_background.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
+            crossfade(true)
+            context?.run { transformations(BlurTransformation(this)) }
+        }
+
+        movie_image.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
+            placeholder(R.drawable.ic_movie_image_error_background)
+            error(R.drawable.ic_movie_image_error_background)
+            transformations(RoundedCornersTransformation(10f))
         }
     }
 }
