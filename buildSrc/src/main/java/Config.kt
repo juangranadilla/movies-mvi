@@ -37,7 +37,7 @@ object Libs {
         const val okhttp_version = "4.0.1"
         const val gson_version = "2.8.5"
         const val coroutines_adapter_version = "0.9.2"
-        const val glide_version = "4.9.0"
+        const val coil_version = "0.6.0"
         const val timber_version = "4.7.1"
         const val koin_version = "2.0.1"
     }
@@ -62,8 +62,7 @@ object Libs {
     const val okhttp = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp_version}"
     const val gson = "com.google.code.gson:gson:${Versions.gson_version}"
     const val coroutines_adapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.coroutines_adapter_version}"
-    const val glide = "com.github.bumptech.glide:glide:${Versions.glide_version}"
-    const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide_version}"
+    const val coil = "io.coil-kt:coil:${Versions.coil_version}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber_version}"
 }
 
