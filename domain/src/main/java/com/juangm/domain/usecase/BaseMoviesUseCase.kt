@@ -10,8 +10,8 @@ abstract class BaseMoviesUseCase: BaseUseCase<MoviesResult>() {
     abstract val loadingResult: MoviesResult
 
     /**
-     * Using the LiveDataScope for coroutines, we can use emit to call a suspend function and return the result,
-     * or just emit a value directly, without calling a suspend function
+     * Using the LiveDataScope for coroutines, we can use emit to call a suspend function
+     * and return the result, or just emit a value directly, without calling a suspend function
      */
     override suspend fun execute(scope: LiveDataScope<MoviesResult>) {
         scope.emit(loadingResult)
@@ -19,7 +19,8 @@ abstract class BaseMoviesUseCase: BaseUseCase<MoviesResult>() {
     }
 
     /**
-     * Here, we call the repository, receive a result, and return a MoviesResult, with the corresponding state
+     * Here, we call the repository, receive a result, and return a MoviesResult,
+     * with the corresponding state
      */
     private suspend fun getMovies(): MoviesResult {
         try {

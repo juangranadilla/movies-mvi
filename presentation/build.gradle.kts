@@ -41,4 +41,15 @@ dependencies {
 
     // Timber
     implementation(Libs.timber)
+
+    // Testing
+    testImplementation(project(":domain"))
+    testImplementation(TestLibs.junit)
+    androidTestImplementation(TestLibs.test_runner)
+    testImplementation(TestLibs.androidx_core_testing)
+    testImplementation(TestLibs.google_truth)
+    testImplementation(TestLibs.mockito_core)
+    testImplementation(TestLibs.mockito_inline)
+    testImplementation(TestLibs.mockito_kotlin)
+    testImplementation(TestLibs.coroutines_testing)
 }
