@@ -11,7 +11,7 @@ object BuildPlugins {
 
     object Versions {
         const val gradle_version = "3.4.1"
-        const val kotlin_version = "1.3.41"
+        const val kotlin_version = "1.3.50"
         const val gradle_versions_version = "0.21.0"
         const val navigation_safeargs_version = "1.0.0"
     }
@@ -37,7 +37,7 @@ object Libs {
         const val okhttp_version = "4.0.1"
         const val gson_version = "2.8.5"
         const val coroutines_adapter_version = "0.9.2"
-        const val coil_version = "0.6.0"
+        const val coil_version = "0.6.1"
         const val timber_version = "4.7.1"
         const val koin_version = "2.0.1"
     }
@@ -72,9 +72,20 @@ object TestLibs {
         const val junit_version = "4.12"
         const val test_runner_version = "1.2.0"
         const val espresso_version = "3.2.0"
+        const val androidx_core_testing_version = "2.0.1"
+        const val google_truth_version = "0.44"
+        const val mockito_version = "2.27.0"
+        const val mockito_kotlin_version = "2.1.0"
+        const val coroutines_version = "1.2.1"
     }
 
     const val junit = "junit:junit:${Versions.junit_version}"
     const val test_runner = "androidx.test:runner:${Versions.test_runner_version}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso_version}"
+    const val androidx_core_testing = "androidx.arch.core:core-testing:${Versions.androidx_core_testing_version}"
+    const val google_truth = "com.google.truth:truth:${Versions.google_truth_version}"
+    const val mockito_core = "org.mockito:mockito-core:${Versions.mockito_version}"
+    const val mockito_inline = "org.mockito:mockito-inline:${Versions.mockito_version}"
+    const val mockito_kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito_kotlin_version}"
+    const val coroutines_testing= "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines_version}"
 }

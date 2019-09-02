@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.juangm.domain.action.Action
 import com.juangm.domain.result.Result
 import com.juangm.presentation.state.ViewState
+import timber.log.Timber
 
 abstract class BaseViewModel<S: ViewState, A: Action, R: Result>(private val initialViewState: S) : ViewModel() {
 
@@ -48,6 +49,7 @@ abstract class BaseViewModel<S: ViewState, A: Action, R: Result>(private val ini
      * Changes the value of the [nextAction] LiveData with the new action
      */
     fun dispatch(action: A) {
+        Timber.i("Dispatch: $action")
         nextAction.value = action
     }
 }

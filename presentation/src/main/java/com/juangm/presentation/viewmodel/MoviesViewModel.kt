@@ -5,6 +5,7 @@ import com.juangm.domain.action.MoviesAction
 import com.juangm.domain.result.MoviesResult
 import com.juangm.domain.usecase.*
 import com.juangm.presentation.state.MoviesViewState
+import timber.log.Timber
 
 class MoviesViewModel(
     private val getTopRatedTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
@@ -23,6 +24,7 @@ class MoviesViewModel(
      * and it will change its value when the use case calls emit()
      */
     override fun handle(action: MoviesAction) = liveData<MoviesResult> {
+        Timber.i("Handle: $action")
         when(action) {
             is MoviesAction.GetPopularMoviesAction -> getPopularMoviesUseCase.execute(this)
             is MoviesAction.LoadMorePopularMoviesAction -> loadMorePopularMoviesUseCase.execute(this)
@@ -39,6 +41,8 @@ class MoviesViewModel(
      * The purpose is to create and return the new view state
      */
     override fun reduce(currentViewState: MoviesViewState, result: MoviesResult): MoviesViewState {
+        Timber.i("currentViewState: $currentViewState")
+        Timber.i("Reduce: $result")
         return when(result) {
             is MoviesResult.Loading -> currentViewState.copy(isLoading = true)
             is MoviesResult.LoadingMore -> currentViewState.copy(isLoading = false, isLoadingMore = true)

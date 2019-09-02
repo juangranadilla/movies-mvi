@@ -22,37 +22,39 @@ class MoviesRepository(private val moviesRemoteSource: MoviesRemoteSourceContrac
         return getMovies(
             loadMore,
             popularMovies,
-            { moviesRemoteSource.getPopularMoviesFromApi(popularNextPage) },
-            { popularNextPage = it + 1 }
-        )
+            moviesRemoteSource.getPopularMoviesFromApi(popularNextPage)
+        ) {
+            popularNextPage = it + 1
+        }
     }
 
     override suspend fun getTopRatedMoviesAsync(loadMore: Boolean): List<Movie>? {
         return getMovies(
             loadMore,
             topRatedMovies,
-            { moviesRemoteSource.getTopRatedMoviesFromApi(topRatedNextPage) },
-            { topRatedNextPage = it + 1 }
-        )
+            moviesRemoteSource.getTopRatedMoviesFromApi(topRatedNextPage)
+        ) {
+            topRatedNextPage = it + 1
+        }
     }
 
     override suspend fun getUpcomingMoviesAsync(loadMore: Boolean): List<Movie>? {
         return getMovies(
             loadMore,
             upcomingMovies,
-            { moviesRemoteSource.getUpcomingMoviesFromApi(upcomingNextPage) },
-            { upcomingNextPage = it + 1 }
-        )
+            moviesRemoteSource.getUpcomingMoviesFromApi(upcomingNextPage)
+        ) {
+            upcomingNextPage = it + 1
+        }
     }
 
-    private suspend fun getMovies(
+    private fun getMovies(
         loadMore: Boolean,
         movies: MutableList<Movie>,
-        remoteSourceCall: suspend () -> MoviesResponse?,
+        moviesResponse: MoviesResponse?,
         onPageRetrieved: (actualPage: Int) -> Unit
     ): List<Movie> {
         if(loadMore || movies.isEmpty()) {
-            val moviesResponse = remoteSourceCall()
             moviesResponse?.let { response ->
                 response.results?.let { movies.addAll(it.toMutableList()) }
                 Timber.i("Page ${response.page} retrieved. Movies size: ${movies.size}")
