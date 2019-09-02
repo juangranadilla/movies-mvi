@@ -1,4 +1,4 @@
-package com.juangm.presentation.viewmodel.rules
+package com.juangm.presentation.viewmodel.base
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

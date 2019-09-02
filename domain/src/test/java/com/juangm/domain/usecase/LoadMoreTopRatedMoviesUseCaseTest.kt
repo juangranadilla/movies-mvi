@@ -5,6 +5,7 @@ import com.juangm.domain.models.Movie
 import com.juangm.domain.repository.MoviesRepositoryContract
 import com.juangm.domain.result.MoviesResult
 import com.juangm.domain.usecase.base.BaseTest
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -39,6 +40,7 @@ class LoadMoreTopRatedMoviesUseCaseTest: BaseTest() {
         loadMoreTopRatedMoviesUseCase.execute(liveDataScope)
 
         verify(moviesRepository).getTopRatedMoviesAsync(true)
+        verifyNoMoreInteractions(moviesRepository)
         verify(liveDataScope).emit(loadMoreTopRatedMoviesUseCase.loadingResult)
         verify(liveDataScope).emit(MoviesResult.Success(movies))
     }
@@ -54,6 +56,7 @@ class LoadMoreTopRatedMoviesUseCaseTest: BaseTest() {
         loadMoreTopRatedMoviesUseCase.execute(liveDataScope)
 
         verify(moviesRepository).getTopRatedMoviesAsync(true)
+        verifyNoMoreInteractions(moviesRepository)
         verify(liveDataScope).emit(loadMoreTopRatedMoviesUseCase.loadingResult)
         verify(liveDataScope).emit(MoviesResult.Failure(errorMessage))
     }

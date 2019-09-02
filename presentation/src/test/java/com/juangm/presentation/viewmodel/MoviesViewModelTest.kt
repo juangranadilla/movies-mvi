@@ -10,6 +10,7 @@ import com.juangm.presentation.viewmodel.util.TestObserver
 import com.juangm.presentation.viewmodel.util.testObserver
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -64,6 +65,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.GetPopularMoviesAction)
 
         verify(moviesRepository).getPopularMoviesAsync(false)
+        verifyNoMoreInteractions(moviesRepository)
         verifyGetMoviesSuccess(movies, viewStateLiveData)
     }
 
@@ -74,6 +76,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.GetPopularMoviesAction)
 
         verify(moviesRepository).getPopularMoviesAsync(false)
+        verifyNoMoreInteractions(moviesRepository)
         verifyGetMoviesError(viewStateLiveData)
     }
 
@@ -84,6 +87,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.GetTopRatedMoviesAction)
 
         verify(moviesRepository).getTopRatedMoviesAsync(false)
+        verifyNoMoreInteractions(moviesRepository)
         verifyGetMoviesSuccess(movies, viewStateLiveData)
     }
 
@@ -94,6 +98,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.GetTopRatedMoviesAction)
 
         verify(moviesRepository).getTopRatedMoviesAsync(false)
+        verifyNoMoreInteractions(moviesRepository)
         verifyGetMoviesError(viewStateLiveData)
     }
 
@@ -104,6 +109,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.GetUpcomingMoviesAction)
 
         verify(moviesRepository).getUpcomingMoviesAsync(false)
+        verifyNoMoreInteractions(moviesRepository)
         verifyGetMoviesSuccess(movies, viewStateLiveData)
     }
 
@@ -114,6 +120,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.GetUpcomingMoviesAction)
 
         verify(moviesRepository).getUpcomingMoviesAsync(false)
+        verifyNoMoreInteractions(moviesRepository)
         verifyGetMoviesError(viewStateLiveData)
     }
 
@@ -124,6 +131,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.LoadMorePopularMoviesAction)
 
         verify(moviesRepository).getPopularMoviesAsync(true)
+        verifyNoMoreInteractions(moviesRepository)
         verifyLoadMoreMoviesSuccess(movies, viewStateLiveData)
     }
 
@@ -134,6 +142,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.LoadMorePopularMoviesAction)
 
         verify(moviesRepository).getPopularMoviesAsync(true)
+        verifyNoMoreInteractions(moviesRepository)
         verifyLoadMoreMoviesError(viewStateLiveData)
     }
 
@@ -144,6 +153,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.LoadMoreTopRatedMoviesAction)
 
         verify(moviesRepository).getTopRatedMoviesAsync(true)
+        verifyNoMoreInteractions(moviesRepository)
         verifyLoadMoreMoviesSuccess(movies, viewStateLiveData)
     }
 
@@ -154,6 +164,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.LoadMoreTopRatedMoviesAction)
 
         verify(moviesRepository).getTopRatedMoviesAsync(true)
+        verifyNoMoreInteractions(moviesRepository)
         verifyLoadMoreMoviesError(viewStateLiveData)
     }
 
@@ -164,6 +175,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.LoadMoreUpcomingMoviesAction)
 
         verify(moviesRepository).getUpcomingMoviesAsync(true)
+        verifyNoMoreInteractions(moviesRepository)
         verifyLoadMoreMoviesSuccess(movies, viewStateLiveData)
     }
 
@@ -174,6 +186,7 @@ class MoviesViewModelTest: BaseMoviesViewModelTest() {
         moviesViewModel.dispatch(MoviesAction.LoadMoreUpcomingMoviesAction)
 
         verify(moviesRepository).getUpcomingMoviesAsync(true)
+        verifyNoMoreInteractions(moviesRepository)
         verifyLoadMoreMoviesError(viewStateLiveData)
     }
 }

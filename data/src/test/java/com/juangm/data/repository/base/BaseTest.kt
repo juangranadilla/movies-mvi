@@ -1,4 +1,4 @@
-package com.juangm.presentation.viewmodel.base
+package com.juangm.data.repository.base
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi

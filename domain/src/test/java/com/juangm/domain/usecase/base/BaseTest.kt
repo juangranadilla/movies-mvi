@@ -1,7 +1,6 @@
 package com.juangm.domain.usecase.base
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.juangm.domain.usecase.rules.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 import org.mockito.junit.MockitoJUnit

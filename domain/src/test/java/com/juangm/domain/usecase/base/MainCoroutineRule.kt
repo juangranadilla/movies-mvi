@@ -1,4 +1,4 @@
-package com.juangm.domain.usecase.rules
+package com.juangm.domain.usecase.base
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
