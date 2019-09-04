@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.ui.movies.detail
+package com.juangm.moviesmvi.ui.movies.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import coil.api.load
 import coil.transform.BlurTransformation
 import coil.transform.RoundedCornersTransformation
 import com.juangm.domain.models.Movie
-import com.juangm.movies_mvi.R
-import com.juangm.movies_mvi.constants.TMDB_BASE_IMAGE_URL
+import com.juangm.moviesmvi.R
+import com.juangm.moviesmvi.constants.TMDB_BASE_IMAGE_URL
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
 
 class MovieDetailFragment : Fragment() {
@@ -41,17 +41,17 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun renderMovieData(movie: Movie, position: Int) {
-        movie_title.text = movie.title
-        movie_description.text = movie.overview
-        movie_date.text = movie.releaseDate
-        movie_image.transitionName = getString(R.string.movie_image_transition, position)
+        movieTitle.text = movie.title
+        movieDescription.text = movie.overview
+        movieDate.text = movie.releaseDate
+        movieImage.transitionName = getString(R.string.movie_image_transition, position)
 
-        movie_image_background.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
+        movieImageBackground.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
             crossfade(true)
             context?.run { transformations(BlurTransformation(this)) }
         }
 
-        movie_image.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
+        movieImage.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
             placeholder(R.drawable.ic_movie_image_error_background)
             error(R.drawable.ic_movie_image_error_background)
             transformations(RoundedCornersTransformation(10f))

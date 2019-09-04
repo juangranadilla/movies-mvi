@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.ui.movies.list
+package com.juangm.moviesmvi.ui.movies.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.juangm.domain.models.Movie
-import com.juangm.movies_mvi.R
-import com.juangm.movies_mvi.ui.utils.GridMarginItemDecoration
-import com.juangm.movies_mvi.ui.utils.InfiniteScrollListener
+import com.juangm.moviesmvi.R
+import com.juangm.moviesmvi.ui.utils.GridMarginItemDecoration
+import com.juangm.moviesmvi.ui.utils.InfiniteScrollListener
 import com.juangm.presentation.state.MoviesViewState
 import com.juangm.presentation.viewmodel.MoviesViewModel
 import kotlinx.android.synthetic.main.fragment_movies.*
@@ -46,7 +46,7 @@ abstract class MoviesBaseFragment : Fragment(), MovieClickListener {
 
     private fun setRecyclerAdapter() {
         moviesAdapter = MoviesAdapter(this)
-        movies_recycler.apply {
+        moviesRecyclerView.apply {
             val gridLayoutManager = GridLayoutManager(context, 3)
             layoutManager = gridLayoutManager
             addItemDecoration(GridMarginItemDecoration(10))
@@ -80,9 +80,9 @@ abstract class MoviesBaseFragment : Fragment(), MovieClickListener {
     private fun renderLoadingState(isLoading: Boolean) {
         Timber.i("isLoading: $isLoading")
         if(isLoading)
-            movies_progress_bar.visibility = View.VISIBLE
+            moviesProgressBar.visibility = View.VISIBLE
         else
-            movies_progress_bar.visibility = View.GONE
+            moviesProgressBar.visibility = View.GONE
     }
 
     /**

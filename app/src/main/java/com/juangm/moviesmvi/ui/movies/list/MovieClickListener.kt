@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.ui.movies.list
+package com.juangm.moviesmvi.ui.movies.list
 
 import android.widget.ImageView
 import com.juangm.domain.models.Movie

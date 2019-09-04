@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.ui.movies
+package com.juangm.moviesmvi.ui.movies
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
-import com.juangm.movies_mvi.R
+import com.juangm.moviesmvi.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MoviesActivity : AppCompatActivity() {
@@ -20,10 +20,10 @@ class MoviesActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigation() {
-        movies_bottom_navigation.setupWithNavController(findNavController(R.id.movies_nav_host_fragment))
+        moviesBottomNavigation.setupWithNavController(findNavController(R.id.moviesNavHostFragment))
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return findNavController(R.id.movies_nav_host_fragment).navigateUp(appBarConfiguration)
+        return findNavController(R.id.moviesNavHostFragment).navigateUp(appBarConfiguration)
     }
 }
