@@ -23,7 +23,7 @@ abstract class MoviesBaseFragment : Fragment(), MovieClickListener {
 
     protected abstract fun getMovies()
     protected abstract fun loadMoreMovies()
-    protected abstract fun showMovieDetails(movie: Movie, movieImage: ImageView, position: Int)
+    protected abstract fun showMovieDetails(movie: Movie, movieImage: ImageView)
 
     protected val moviesViewModel by viewModel<MoviesViewModel>()
     private lateinit var moviesAdapter: MoviesAdapter
@@ -104,8 +104,8 @@ abstract class MoviesBaseFragment : Fragment(), MovieClickListener {
         }
     }
 
-    override fun onMovieClick(movie: Movie, movieImage: ImageView, position: Int) {
-        Timber.i("Showing detail for movie ${movie.id} with name: ${movie.title} at position $position")
-        showMovieDetails(movie, movieImage, position)
+    override fun onMovieClick(movie: Movie, movieImage: ImageView) {
+        Timber.i("Showing detail for movie ${movie.id} with name: ${movie.title}")
+        showMovieDetails(movie, movieImage)
     }
 }

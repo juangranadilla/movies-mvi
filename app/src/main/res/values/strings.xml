@@ -10,8 +10,6 @@
     <string name="upcoming_movies_fragment_title">Upcoming movies</string>
     <string name="movie_detail_fragment_title">Movie detail</string>
 
-    <string name="movie_image_transition">movie_image_transition_%1$d</string>
-
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit

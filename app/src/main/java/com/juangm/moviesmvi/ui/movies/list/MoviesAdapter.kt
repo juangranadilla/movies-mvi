@@ -25,7 +25,7 @@ class MoviesAdapter(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
-        Timber.d("Binding view holder at position $position --> id: ${movie.id}, title: ${movie.title}")
+        Timber.d("Binding item at position $position with id: ${movie.id} and title: ${movie.title}")
         holder.bind(movie)
     }
 
@@ -40,8 +40,8 @@ class MoviesAdapter(
                 }
 
                 setOnClickListener {
-                    movieImage.transitionName = context.getString(R.string.movie_image_transition, adapterPosition)
-                    movieClickListener.onMovieClick(movie, movieImage, adapterPosition)
+                    movieImage.transitionName = movie.id.toString()
+                    movieClickListener.onMovieClick(movie, movieImage)
                 }
             }
         }

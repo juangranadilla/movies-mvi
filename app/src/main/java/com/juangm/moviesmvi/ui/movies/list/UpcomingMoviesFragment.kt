@@ -12,8 +12,8 @@ class UpcomingMoviesFragment : MoviesBaseFragment() {
 
     override fun loadMoreMovies() = moviesViewModel.dispatch(MoviesAction.LoadMoreUpcomingMoviesAction)
 
-    override fun showMovieDetails(movie: Movie, movieImage: ImageView, position: Int) {
-        val directions = UpcomingMoviesFragmentDirections.actionUpcomingMoviesFragmentToMovieDetailFragment(movie, position)
+    override fun showMovieDetails(movie: Movie, movieImage: ImageView) {
+        val directions = UpcomingMoviesFragmentDirections.actionUpcomingMoviesFragmentToMovieDetailFragment(movie)
         val extras = FragmentNavigatorExtras(movieImage to movieImage.transitionName)
         findNavController().navigate(directions, extras)
     }

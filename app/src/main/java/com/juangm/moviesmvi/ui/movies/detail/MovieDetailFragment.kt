@@ -36,15 +36,14 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val movie = args.movie
-        val position = args.position
-        renderMovieData(movie, position)
+        renderMovieData(movie)
     }
 
-    private fun renderMovieData(movie: Movie, position: Int) {
+    private fun renderMovieData(movie: Movie) {
         movieTitle.text = movie.title
         movieDescription.text = movie.overview
         movieDate.text = movie.releaseDate
-        movieImage.transitionName = getString(R.string.movie_image_transition, position)
+        movieImage.transitionName = movie.id.toString()
 
         movieImageBackground.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
             crossfade(true)

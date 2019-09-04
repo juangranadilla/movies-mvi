@@ -12,8 +12,8 @@ class PopularMoviesFragment : MoviesBaseFragment() {
 
     override fun loadMoreMovies() = moviesViewModel.dispatch(MoviesAction.LoadMorePopularMoviesAction)
 
-    override fun showMovieDetails(movie: Movie, movieImage: ImageView, position: Int) {
-        val directions = PopularMoviesFragmentDirections.actionPopularMoviesFragmentToMovieDetailFragment(movie, position)
+    override fun showMovieDetails(movie: Movie, movieImage: ImageView) {
+        val directions = PopularMoviesFragmentDirections.actionPopularMoviesFragmentToMovieDetailFragment(movie)
         val extras = FragmentNavigatorExtras(movieImage to movieImage.transitionName)
         findNavController().navigate(directions, extras)
     }

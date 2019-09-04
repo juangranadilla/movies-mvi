@@ -62,10 +62,6 @@
                 android:name="movie"
                 app:argType="com.juangm.domain.models.Movie"/>
 
-        <argument
-                android:name="position"
-                app:argType="integer"/>
-
     </fragment>
 
 </navigation>

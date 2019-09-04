@@ -4,5 +4,5 @@ import android.widget.ImageView
 import com.juangm.domain.models.Movie
 
 interface MovieClickListener {
-    fun onMovieClick(movie: Movie, movieImage: ImageView, position: Int)
+    fun onMovieClick(movie: Movie, movieImage: ImageView)
 }
