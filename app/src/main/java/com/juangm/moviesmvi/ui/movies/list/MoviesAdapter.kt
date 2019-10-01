@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.ui.movies.list
+package com.juangm.moviesmvi.ui.movies.list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.transform.RoundedCornersTransformation
 import com.juangm.domain.models.Movie
-import com.juangm.movies_mvi.R
-import com.juangm.movies_mvi.constants.TMDB_BASE_IMAGE_URL
+import com.juangm.moviesmvi.R
+import com.juangm.moviesmvi.constants.TMDB_BASE_IMAGE_URL
 import kotlinx.android.synthetic.main.item_movie.view.*
 import timber.log.Timber
 
@@ -25,7 +25,7 @@ class MoviesAdapter(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
-        Timber.d("Binding view holder at position $position --> id: ${movie.id}, title: ${movie.title}")
+        Timber.d("Binding item at position $position with id: ${movie.id} and title: ${movie.title}")
         holder.bind(movie)
     }
 
@@ -33,15 +33,15 @@ class MoviesAdapter(
 
         fun bind(movie: Movie) {
             itemView.apply {
-                movie_image.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
+                movieImage.load(TMDB_BASE_IMAGE_URL + movie.posterPath) {
                     crossfade(true)
                     error(R.drawable.ic_movie_image_error_background)
                     transformations(RoundedCornersTransformation(10f))
                 }
 
                 setOnClickListener {
-                    movie_image.transitionName = context.getString(R.string.movie_image_transition, adapterPosition)
-                    movieClickListener.onMovieClick(movie, movie_image, adapterPosition)
+                    movieImage.transitionName = movie.id.toString()
+                    movieClickListener.onMovieClick(movie, movieImage)
                 }
             }
         }

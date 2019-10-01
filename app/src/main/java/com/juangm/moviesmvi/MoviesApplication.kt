@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi
+package com.juangm.moviesmvi
 
 import android.app.Application
 import com.juangm.data.di.dataModule

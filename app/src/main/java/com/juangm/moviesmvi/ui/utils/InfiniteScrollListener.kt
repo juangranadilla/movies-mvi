@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.ui.utils
+package com.juangm.moviesmvi.ui.utils
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +17,7 @@ class InfiniteScrollListener(
     private var visibleItemCount = 0
     private var totalItemCount = 0
 
-    override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
+    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
 
         if (dy > 0) {

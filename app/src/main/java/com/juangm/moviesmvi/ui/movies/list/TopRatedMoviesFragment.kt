@@ -1,4 +1,4 @@
-package com.juangm.movies_mvi.ui.movies.list
+package com.juangm.moviesmvi.ui.movies.list
 
 import android.widget.ImageView
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -12,8 +12,8 @@ class TopRatedMoviesFragment : MoviesBaseFragment() {
 
     override fun loadMoreMovies() = moviesViewModel.dispatch(MoviesAction.LoadMoreTopRatedMoviesAction)
 
-    override fun showMovieDetails(movie: Movie, movieImage: ImageView, position: Int) {
-        val directions = TopRatedMoviesFragmentDirections.actionTopRatedMoviesFragmentToMovieDetailFragment(movie, position)
+    override fun showMovieDetails(movie: Movie, movieImage: ImageView) {
+        val directions = TopRatedMoviesFragmentDirections.actionTopRatedMoviesFragmentToMovieDetailFragment(movie)
         val extras = FragmentNavigatorExtras(movieImage to movieImage.transitionName)
         findNavController().navigate(directions, extras)
     }

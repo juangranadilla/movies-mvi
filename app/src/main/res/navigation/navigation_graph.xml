@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/popularMoviesFragment"
-            android:name="com.juangm.movies_mvi.ui.movies.list.PopularMoviesFragment"
+            android:name="com.juangm.moviesmvi.ui.movies.list.PopularMoviesFragment"
             android:label="@string/popular_movies_fragment_title"
             tools:layout="@layout/fragment_movies">
 
@@ -23,7 +23,7 @@
 
     <fragment
             android:id="@+id/topRatedMoviesFragment"
-            android:name="com.juangm.movies_mvi.ui.movies.list.TopRatedMoviesFragment"
+            android:name="com.juangm.moviesmvi.ui.movies.list.TopRatedMoviesFragment"
             android:label="@string/top_rated_movies_fragment_title"
             tools:layout="@layout/fragment_movies">
 
@@ -39,7 +39,7 @@
 
     <fragment
             android:id="@+id/upcomingMoviesFragment"
-            android:name="com.juangm.movies_mvi.ui.movies.list.UpcomingMoviesFragment"
+            android:name="com.juangm.moviesmvi.ui.movies.list.UpcomingMoviesFragment"
             android:label="@string/upcoming_movies_fragment_title"
             tools:layout="@layout/fragment_movies">
 
@@ -54,17 +54,13 @@
     </fragment>
 
     <fragment android:id="@+id/movieDetailFragment"
-              android:name="com.juangm.movies_mvi.ui.movies.detail.MovieDetailFragment"
+              android:name="com.juangm.moviesmvi.ui.movies.detail.MovieDetailFragment"
               android:label="@string/movie_detail_fragment_title"
               tools:layout="@layout/fragment_movie_detail">
 
         <argument
                 android:name="movie"
                 app:argType="com.juangm.domain.models.Movie"/>
-
-        <argument
-                android:name="position"
-                app:argType="integer"/>
 
     </fragment>
 
