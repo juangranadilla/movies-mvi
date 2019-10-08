@@ -1,8 +1,11 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+
+apply(plugin = "com.github.ben-manes.versions")
+
 buildscript {
     repositories {
         google()
         jcenter()
-        
     }
     dependencies {
         classpath(BuildPlugins.gradle)
@@ -21,4 +24,11 @@ allprojects {
 
 tasks.register("clean",Delete::class) {
     delete(rootProject.buildDir)
+}
+
+tasks.withType<DependencyUpdatesTask> {
+    checkForGradleUpdate = true
+    outputFormatter = "json"
+    outputDir = "build/dependencyUpdates"
+    reportfileName = "report"
 }

@@ -31,10 +31,6 @@ dependencies {
     implementation(Libs.lifecycle_livedata)
     kapt(Libs.lifecycle_compiler)
 
-    // Coroutines
-    implementation(Libs.coroutines_android)
-    implementation(Libs.coroutines_core)
-
     // Koin
     implementation(Libs.koin)
     implementation(Libs.koin_viewmodel)

@@ -30,7 +30,6 @@ dependencies {
 
     // Koin
     implementation(Libs.koin)
-    implementation(Libs.koin_viewmodel)
 
     // Gson
     implementation(Libs.gson)

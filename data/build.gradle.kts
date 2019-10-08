@@ -45,7 +45,6 @@ dependencies {
 
     // Koin
     implementation(Libs.koin)
-    implementation(Libs.koin_viewmodel)
 
     // Retrofit
     implementation(Libs.retrofit) {
@@ -55,9 +54,6 @@ dependencies {
 
     // OkHttp
     implementation(Libs.okhttp)
-
-    // Gson
-    implementation(Libs.gson)
 
     // Retrofit coroutines adapter
     implementation(Libs.coroutines_adapter)

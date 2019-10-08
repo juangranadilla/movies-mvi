@@ -6,7 +6,6 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    id("com.github.ben-manes.versions")
     id("androidx.navigation.safeargs")
 }
 
@@ -52,10 +51,6 @@ dependencies {
     implementation(Libs.constraint)
     implementation(Libs.navigation_fragment)
     implementation(Libs.navigation_ui)
-    implementation(Libs.lifecycle_extensions)
-    implementation(Libs.lifecycle_viewmodel)
-    implementation(Libs.lifecycle_livedata)
-    kapt(Libs.lifecycle_compiler)
 
     // Material
     implementation(Libs.material)
@@ -69,11 +64,6 @@ dependencies {
 
     // Timber
     implementation(Libs.timber)
-
-    // Testing
-    testImplementation(TestLibs.junit)
-    androidTestImplementation(TestLibs.test_runner)
-    androidTestImplementation(TestLibs.espresso)
 }
 
 tasks.withType<KotlinCompile> {
