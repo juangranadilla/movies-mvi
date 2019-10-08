@@ -12,7 +12,7 @@ object BuildPlugins {
     object Versions {
         const val gradle_version = "3.4.1"
         const val kotlin_version = "1.3.50"
-        const val gradle_versions_version = "0.21.0"
+        const val gradle_versions_version = "0.25.0"
         const val navigation_safeargs_version = "1.0.0"
     }
 
@@ -26,18 +26,18 @@ object Libs {
 
     object Versions {
         const val core_ktx_version = "1.0.2"
-        const val appcompat_version = "1.1.0-rc01"
+        const val appcompat_version = "1.1.0"
         const val legacy_support_v4_version = "1.0.0"
         const val constraint_version = "1.1.3"
         const val navigation_version = "2.0.0"
-        const val lifecycle_version = "2.2.0-alpha03"
+        const val lifecycle_version = "2.2.0-alpha05"
         const val material_version = "1.1.0-alpha09"
-        const val coroutines_version = "1.2.1"
-        const val retrofit_version = "2.6.0"
-        const val okhttp_version = "4.0.1"
-        const val gson_version = "2.8.5"
+        const val coroutines_version = "1.3.2"
+        const val retrofit_version = "2.6.2"
+        const val okhttp_version = "4.2.2"
+        const val gson_version = "2.8.6"
         const val coroutines_adapter_version = "0.9.2"
-        const val coil_version = "0.6.1"
+        const val coil_version = "0.7.0"
         const val timber_version = "4.7.1"
         const val koin_version = "2.0.1"
     }
@@ -72,11 +72,11 @@ object TestLibs {
         const val junit_version = "4.12"
         const val test_runner_version = "1.2.0"
         const val espresso_version = "3.2.0"
-        const val androidx_core_testing_version = "2.0.1"
-        const val google_truth_version = "0.44"
-        const val mockito_version = "2.27.0"
+        const val androidx_core_testing_version = "2.1.0"
+        const val google_truth_version = "1.0"
+        const val mockito_version = "3.1.0"
         const val mockito_kotlin_version = "2.1.0"
-        const val coroutines_version = "1.2.1"
+        const val coroutines_version = "1.3.2"
     }
 
     const val junit = "junit:junit:${Versions.junit_version}"

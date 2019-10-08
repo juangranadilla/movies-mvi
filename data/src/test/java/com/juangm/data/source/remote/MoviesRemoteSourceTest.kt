@@ -7,8 +7,6 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
@@ -41,7 +39,7 @@ class MoviesRemoteSourceTest: BaseTest() {
     @Test
     fun `get popular movies from API`() = runBlockingTest {
         `when`(moviesService.getPopularMoviesAsync(page = page))
-            .thenReturn(GlobalScope.async { moviesResponse })
+            .thenReturn(moviesResponse)
 
         moviesRemoteSource.getPopularMoviesFromApi(page)
 
@@ -52,7 +50,7 @@ class MoviesRemoteSourceTest: BaseTest() {
     @Test
     fun `get top rated movies from API`() = runBlockingTest {
         `when`(moviesService.getTopRatedMoviesAsync(page = page))
-            .thenReturn(GlobalScope.async { moviesResponse })
+            .thenReturn(moviesResponse)
 
         moviesRemoteSource.getTopRatedMoviesFromApi(page)
 
@@ -63,7 +61,7 @@ class MoviesRemoteSourceTest: BaseTest() {
     @Test
     fun `get upcoming movies from API`() = runBlockingTest {
         `when`(moviesService.getUpcomingMoviesAsync(page = page))
-            .thenReturn(GlobalScope.async { moviesResponse })
+            .thenReturn(moviesResponse)
 
         moviesRemoteSource.getUpcomingMoviesFromApi(page)
 
