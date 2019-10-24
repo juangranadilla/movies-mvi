@@ -5,5 +5,14 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val presentationModule = module {
-    viewModel { MoviesViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel {
+        MoviesViewModel(
+            getTopRatedTopRatedMoviesUseCase = get(),
+            loadMoreTopRatedTopRatedMoviesUseCase = get(),
+            getPopularMoviesUseCase = get(),
+            loadMorePopularMoviesUseCase = get(),
+            getUpcomingMoviesUseCase = get(),
+            loadMoreUpcomingMoviesUseCase = get()
+        )
+    }
 }
