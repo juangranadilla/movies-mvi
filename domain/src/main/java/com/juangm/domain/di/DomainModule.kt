@@ -4,10 +4,10 @@ import com.juangm.domain.usecase.*
 import org.koin.dsl.module
 
 val domainModule = module {
-    single { GetPopularMoviesUseCase(get()) }
-    single { LoadMorePopularMoviesUseCase(get()) }
-    single { GetTopRatedMoviesUseCase(get()) }
-    single { LoadMoreTopRatedMoviesUseCase(get()) }
-    single { GetUpcomingMoviesUseCase(get()) }
-    single { LoadMoreUpcomingMoviesUseCase(get()) }
+    single { GetPopularMoviesUseCase(moviesRepository = get()) }
+    single { LoadMorePopularMoviesUseCase(moviesRepository = get()) }
+    single { GetTopRatedMoviesUseCase(moviesRepository = get()) }
+    single { LoadMoreTopRatedMoviesUseCase(moviesRepository = get()) }
+    single { GetUpcomingMoviesUseCase(moviesRepository = get()) }
+    single { LoadMoreUpcomingMoviesUseCase(moviesRepository = get()) }
 }
